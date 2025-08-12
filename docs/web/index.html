@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emotion-Based Anxiety Detection Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a33;
+      --text: #e9eefc;
+      --muted: #a9b4d0;
+      --accent: #67a4ff;
+      --ok: #36c275;
+      --warn: #ff6b6b;
+      --line: #253257;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #090e1c 0%, #0b1020 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .hero, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    h1, h2, h3 { margin: 0 0 10px; }
+    h1 { font-size: 30px; }
+    h2 { font-size: 21px; margin-top: 8px; }
+    p { margin: 8px 0; color: var(--muted); }
+    ul { margin: 8px 0 0 20px; color: var(--muted); }
+    li { margin: 4px 0; }
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #0e1630;
+    }
+    .kpi .v {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .kpi .t {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .tag-ok { color: var(--ok); }
+    .tag-warn { color: var(--warn); }
+    .footer {
+      margin-top: 20px;
+      color: #8f9bbd;
+      font-size: 13px;
+      text-align: center;
+    }
+    @media (max-width: 780px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Emotion-Based Anxiety Detection</h1>
+      <p>실시간 얼굴 감정 분석(arousal/valence)과 통계 기반 분류(LDA + SVM)를 결합해 불안 상태를 추정하는 졸업 프로젝트입니다.</p>
+      <span class="badge">Python</span>
+      <span class="badge">OpenCV</span>
+      <span class="badge">ONNX Runtime</span>
+      <span class="badge">scikit-learn</span>
+    </section>
+
+    <section class="card">
+      <h2>문제 정의</h2>
+      <p>감정 인식 프로젝트는 라벨 출력(행복/슬픔 등)에 그치는 경우가 많습니다. 이 프로젝트는 감정 연속값을 활용해 실제 상태 추정(불안)으로 확장하는 데 집중했습니다.</p>
+    </section>
+
+    <section class="card">
+      <h2>시스템 파이프라인</h2>
+      <ul>
+        <li>웹캠 프레임 수집</li>
+        <li>얼굴 검출 및 ROI 전처리</li>
+        <li>ONNX 모델 추론으로 arousal/valence 추출</li>
+        <li>LDA + SVM 기반 불안 여부 분류</li>
+        <li>실시간 오버레이 UI(상태/점수/그래프) 출력</li>
+      </ul>
+    </section>
+
+    <section class="grid">
+      <article class="kpi">
+        <div class="v">2-Thread</div>
+        <div class="t">웹캠 입력/추론 처리 분리</div>
+      </article>
+      <article class="kpi">
+        <div class="v">Real-time</div>
+        <div class="t">프레임 큐 기반 실시간 피드백</div>
+      </article>
+      <article class="kpi">
+        <div class="v tag-ok">Anxiety: Yes/No</div>
+        <div class="t">이진 분류 결과 + score 제공</div>
+      </article>
+      <article class="kpi">
+        <div class="v tag-warn">Arousal/Valence</div>
+        <div class="t">연속값 시각화 및 상태 해석 보조</div>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>핵심 구현 파일</h2>
+      <ul>
+        <li><code>source/emonet5/emonet5/cap.py</code>: 최종 실시간 추론/분류/시각화 파이프라인</li>
+        <li><code>source/emotion_labels.csv</code>, <code>source/tag10.csv</code>: 라벨/학습 데이터</li>
+        <li><code>source/README.md</code>: EmoNet 기반 레퍼런스 문서</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>한계 및 개선 방향</h2>
+      <ul>
+        <li>단일 영상 모달리티 -> 음성/텍스트 결합 멀티모달 확장</li>
+        <li>개인차 대응 한계 -> 사용자별 베이스라인 적응</li>
+        <li>정량 평가 미흡 -> 정확도/F1/지연시간 리포트 체계화</li>
+      </ul>
+    </section>
+
+    <div class="footer">
+      Graduation Project Portfolio - Emotion-Based Anxiety Detection
+    </div>
+  </main>
+</body>
+</html>

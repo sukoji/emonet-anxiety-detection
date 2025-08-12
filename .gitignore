@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Node (Drive tooling)
+scripts/node_modules/
+scripts/package-lock.json
+
+# Large / local-only assets (see assets/README.md)
+assets/*.onnx
+assets/*.pth
+assets/tag10.csv
+assets/emotion_labels.csv
+source/
+scripts/
+portfolio/
+
+# Archives and generated packages
+portfolio/*.zip
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Credentials
+**/credentials.json
+**/gcp-oauth.keys.json
+**/*client_secret*.json
