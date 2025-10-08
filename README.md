@@ -19,14 +19,7 @@
 
 ## 프로젝트 개요
 
-| 항목 | 내용 |
-|:---|:---|
-| 유형 | 졸업 프로젝트 |
-| 소속 | 상명대학교 인간중심인공지능학과 |
-| 주제 | Knowledge Distillation 기반 경량 FER 모델을 활용한 실시간 불안 상태 탐지 |
-| 기간 | 2024.03 — 2024.10 |
-| 최종 구현 | `src/cap.py` |
-| 참고 논문 | [Lee et al., *Appl. Sci.* 2023, 13, 6409](https://doi.org/10.3390/app13116409) |
+상명대학교 인간중심인공지능학과 졸업 프로젝트로, 2024년 3월부터 10월까지 진행했습니다. Knowledge Distillation 기반 경량 FER 모델을 활용해 실시간 불안 상태를 탐지하는 것이 주제이며, 최종 구현은 `src/cap.py`입니다. 참고 논문은 [Lee et al., *Appl. Sci.* 2023, 13, 6409](https://doi.org/10.3390/app13116409)입니다.
 
 본 프로젝트는 [Lee et al. (2023)](https://doi.org/10.3390/app13116409)에서 제안한 **Knowledge Distillation + Teacher Bound** 기반 경량 얼굴 표정 인식(FER) 모델을 응용한 졸업 프로젝트입니다.
 
