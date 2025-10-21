@@ -23,7 +23,7 @@
 
 본 프로젝트는 [Lee et al. (2023)](https://doi.org/10.3390/app13116409)에서 제안한 **Knowledge Distillation + Teacher Bound** 기반 경량 얼굴 표정 인식(FER) 모델을 응용한 졸업 프로젝트입니다.
 
-논문에서는 EmoNet을 teacher model로, MobileNetV2/EfficientFormer를 student model로 사용해 AffectNet 데이터셋에서 8종 감정 분류와 valence/arousal 회귀를 동시에 학습했습니다. 본 프로젝트는 이 student model(`FER_student.onnx`)이 출력하는 arousal/valence 값을 입력으로 받아, **LDA + SVM** 분류기로 불안 여부를 실시간 판별하는 응용 시스템을 구현했습니다.
+논문에서는 EmoNet을 teacher model로, MobileNetV2/EfficientFormer를 student model로 사용해 AffectNet 데이터셋에서 8종 감정 분류와 valence/arousal 회귀를 동시에 학습했습니다. 본 프로젝트는 이 student model(`fer_student_kd.onnx`)이 출력하는 arousal/valence 값을 입력으로 받아, **LDA + SVM** 분류기로 불안 여부를 실시간 판별하는 응용 시스템을 구현했습니다.
 
 ---
 
@@ -49,7 +49,7 @@ Lee et al. (2023)의 논문은 이산적 감정 분류만으로는 감정 상태
 ```mermaid
 flowchart LR
     CAM["웹캠 입력"] --> FACE["Haar Cascade\n얼굴 검출"]
-    FACE --> ONNX["FER_student.onnx\n(KD Student Model)"]
+    FACE --> ONNX["fer_student_kd.onnx\n(KD Student Model)"]
     ONNX --> AV["arousal / valence"]
     AV --> LDA["LDA + SVM\n불안 분류"]
     LDA --> UI["실시간 시각화\nAnxiety Yes/No + Score"]
@@ -62,13 +62,13 @@ flowchart LR
   EmoNet (Teacher, 16.99 GMAC)
        │ KD + Teacher Bound
        ▼
-  FER_student (MobileNetV2, 0.3 GMAC)
+  fer_student_kd.onnx (MobileNetV2, 0.3 GMAC)
        │ ONNX 변환
        ▼
-  FER_student (1).onnx  ──→  arousal, valence 출력
+  fer_student_kd.onnx  ──→  arousal, valence 출력
                                     │
 [본 졸업 프로젝트 — 응용 시스템]        │
-  tag10.csv 라벨 데이터               │
+  anxiety_classifier_labels.csv       │
        │                             │
        ▼                             ▼
   LDA + SVM 학습  ←──── arousal, valence
@@ -164,9 +164,12 @@ emonet-anxiety-detection/
 ├── src/
 │   └── cap.py                  # 최종 실시간 데모
 ├── assets/                     # 로컬 전용 (Git 미포함)
-│   ├── FER_student (1).onnx    # KD student model
-│   ├── tag10.csv               # LDA+SVM 학습 라벨
-│   └── image.png               # 그래프 배경 (선택)
+│   ├── models/
+│   │   └── fer_student_kd.onnx           # KD 경량 FER 모델
+│   ├── data/
+│   │   └── anxiety_classifier_labels.csv # 불안 분류기 학습 라벨
+│   └── ui/
+│       └── valence_arousal_chart_bg.png  # 차트 배경 (선택)
 └── docs/
     ├── PORTFOLIO.md
     ├── RESUME_SUMMARY.md
@@ -185,7 +188,9 @@ python -m venv .venv
 .venv\Scripts\activate        # Windows
 pip install -r requirements.txt
 
-# assets/ 에 FER_student (1).onnx, tag10.csv 배치 (assets/README.md 참고)
+# assets/ 에 모델·라벨 파일 배치 (assets/README.md 참고)
+#   models/fer_student_kd.onnx
+#   data/anxiety_classifier_labels.csv
 python src/cap.py
 ```
 

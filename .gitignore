@@ -16,10 +16,9 @@ scripts/node_modules/
 scripts/package-lock.json
 
 # Large / local-only assets (see assets/README.md)
-assets/*.onnx
-assets/*.pth
-assets/tag10.csv
-assets/emotion_labels.csv
+assets/models/*.onnx
+assets/data/*.csv
+assets/ui/*.png
 source/
 scripts/
 portfolio/

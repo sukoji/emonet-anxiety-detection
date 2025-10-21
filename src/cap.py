@@ -17,19 +17,19 @@ from sklearn.svm import SVC
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 ASSETS_DIR = ROOT_DIR / "assets"
-ONNX_PATH = ASSETS_DIR / "FER_student (1).onnx"
-TAG10_PATH = ASSETS_DIR / "tag10.csv"
-OVERLAY_IMAGE_PATH = ASSETS_DIR / "image.png"
+MODEL_PATH = ASSETS_DIR / "models" / "fer_student_kd.onnx"
+LABELS_PATH = ASSETS_DIR / "data" / "anxiety_classifier_labels.csv"
+CHART_BG_PATH = ASSETS_DIR / "ui" / "valence_arousal_chart_bg.png"
 
 
 def main() -> None:
-    if not TAG10_PATH.exists():
-        raise FileNotFoundError(f"Missing training data: {TAG10_PATH}. See assets/README.md")
-    if not ONNX_PATH.exists():
-        raise FileNotFoundError(f"Missing ONNX model: {ONNX_PATH}. See assets/README.md")
+    if not LABELS_PATH.exists():
+        raise FileNotFoundError(f"Missing training data: {LABELS_PATH}. See assets/README.md")
+    if not MODEL_PATH.exists():
+        raise FileNotFoundError(f"Missing ONNX model: {MODEL_PATH}. See assets/README.md")
 
     lda, svm_model_lda, scaler, min_score, max_score = train_model(
-        pd.read_csv(TAG10_PATH, encoding="ISO-8859-1")
+        pd.read_csv(LABELS_PATH, encoding="ISO-8859-1")
     )
 
     frame_queue = queue.Queue(maxsize=16)
@@ -62,8 +62,8 @@ def draw_arousal_valence_on_face(frame, x, y, w, h, valence, arousal, last_anxie
     graph_width, graph_height = 250, 220
     graph_x, graph_y = 10, frame.shape[0] - graph_height - 10
 
-    if OVERLAY_IMAGE_PATH.exists():
-        graph_bg = cv2.imread(str(OVERLAY_IMAGE_PATH))
+    if CHART_BG_PATH.exists():
+        graph_bg = cv2.imread(str(CHART_BG_PATH))
         graph_bg = cv2.resize(graph_bg, (graph_width, graph_height))
         frame[graph_y : graph_y + graph_height, graph_x : graph_x + graph_width] = graph_bg
 
@@ -152,9 +152,9 @@ def read_webcam_frames(frame_queue, result_queue, input_index):
 
 def process_batches(frame_queue, result_queue, lda, svm_model_lda, scaler, min_score, max_score):
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-    onnx_model = onnx.load(str(ONNX_PATH))
+    onnx_model = onnx.load(str(MODEL_PATH))
     onnx.checker.check_model(onnx_model)
-    ort_session = ort.InferenceSession(str(ONNX_PATH))
+    ort_session = ort.InferenceSession(str(MODEL_PATH))
 
     frames = []
     while True:
