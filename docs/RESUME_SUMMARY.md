@@ -1,26 +1,31 @@
-# Resume Project Summary
+# Resume / Interview Summary
 
-## Emotion-Based Anxiety Detection (Graduation Project)
+## Voice Phishing Prevention ATM Emotion Recognition System
 
-실시간 카메라 입력에서 얼굴 표정을 분석하고, arousal/valence 기반으로 불안 상태를 분류하는 감정 AI 시스템을 구현했습니다.
+**Team Tripos (트라이포스)** · Sangmyung University · Graduation Project · 2024
 
-### Key Contributions
-
-- ONNX 기반 감정 추론 파이프라인을 실시간 웹캠 루프에 통합
-- arousal/valence 특징을 활용한 LDA + SVM 불안 이진 분류기 설계
-- 멀티스레드 + 큐 구조로 프레임 처리 지연 완화
-- 사용자 이해도를 높이는 시각화 UI(상태, score, 바/좌표 오버레이) 구현
-
-### Tech
-
-Python, OpenCV, ONNX Runtime, scikit-learn, NumPy, Pandas
-
-### Impact
-
-- 단순 감정 라벨 출력에서 나아가 심리 상태 판단(불안 여부)으로 기능 확장
-- 실시간 데모 가능한 형태로 구현해 프로젝트 완성도 향상
-- 감정 컴퓨팅을 사용자 피드백 시스템으로 연결하는 실무형 구조 경험 확보
+**Members:** Kim Seong-hyeon, Byeon Seong-ho, Ahn Seong-chan, Lim Jae-young, Jin Seok-ho
 
 ### One-Line
 
-얼굴 표정 감정 인식 모델에 통계 기반 분류기를 결합해 실시간 불안 탐지 데모를 완성한 프로젝트.
+Developed an ATM emotion recognition system that detects anxiety from facial expressions in real time to help prevent voice phishing, using Knowledge Distillation and LDA+SVM.
+
+### Problem
+
+ATM voice phishing warnings are passive and often ineffective. We built an active detection pipeline: camera → emotion analysis → anxiety classification → counselor alert.
+
+### Technical Highlights
+
+- Lightweight FER via Knowledge Distillation (EmoNet teacher → MobileNetV2 student, 0.3 GMAC)
+- Korean emotion dataset from AI-Hub (7 classes, ~500K samples)
+- LDA + SVM anxiety classifier on arousal/valence (86% accuracy, 0.96 recall on anxiety)
+- Tunable SVM sensitivity for emergency vs. monitoring modes
+- Real-time multi-threaded webcam demo (`src/cap.py`)
+
+### Outcome
+
+Presented at 2024 Sangmyung University Graduation Portfolio Festival (Nov 2024).
+
+### Reference
+
+Lee, K.; Kim, S.; Lee, E.C. Fast and Accurate FER via Knowledge Distillation. *Appl. Sci.* 2023, 13, 6409.

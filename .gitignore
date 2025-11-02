@@ -19,9 +19,7 @@ scripts/package-lock.json
 assets/models/*.onnx
 assets/data/*.csv
 assets/ui/*.png
-source/
-scripts/
-portfolio/
+tmp_frames/
 
 # Archives and generated packages
 portfolio/*.zip
