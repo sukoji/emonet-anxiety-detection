@@ -145,6 +145,18 @@ arousal, valence → StandardScaler → LDA → SVM(RBF) → Anxiety Yes/No + Sc
 
 ## 데모
 
+### 동작 시나리오
+
+<div align="center">
+
+![데모 시나리오](docs/demo/demo_scenario.gif)
+
+*정상 거래 → 보이스피싱 전화 수신 → 표정에서 불안 감지 → 상담원 연결*
+
+</div>
+
+> 위 애니메이션은 **시연 시나리오를 재현한 것**입니다. 실제 `src/cap.py` 데모 화면과 동일한 UI(얼굴 검출 박스, `Anxiety` 라벨·Score, Valence/Arousal 바, 2D 감정 좌표 차트)를 그대로 사용하되, 개인정보 보호를 위해 실제 얼굴 대신 일러스트 아바타로 대체했습니다. 좌하단 감정 좌표의 점이 **안정 → 불안** 사분면으로 이동하고, 박스 색이 **초록 → 빨강**으로 바뀌며 Score가 상승하는 흐름을 확인할 수 있습니다. (생성 스크립트: [`tools/make_demo_gif.py`](tools/make_demo_gif.py))
+
 | 자료 | 설명 |
 |:---|:---|
 | [졸업페스티벌 발표 영상](docs/demo/tripos_graduation_presentation.mp4) | 팀 트라이포스 전체 발표 (약 8분) |
@@ -162,12 +174,15 @@ emonet-anxiety-detection/
 ├── requirements.txt
 ├── src/
 │   └── cap.py                              # 최종 실시간 데모
+├── tools/
+│   └── make_demo_gif.py                    # 데모 시나리오 GIF 생성 스크립트
 ├── assets/
 │   ├── models/fer_student_kd.onnx          # KD student FER 모델
 │   ├── data/anxiety_classifier_labels.csv  # 불안 분류기 학습 라벨
 │   └── ui/valence_arousal_chart_bg.png     # 차트 배경 (선택)
 └── docs/
     ├── PORTFOLIO.md
+    ├── demo/demo_scenario.gif              # 동작 시나리오 애니메이션
     ├── demo/tripos_graduation_presentation.mp4
     └── web/index.html
 ```

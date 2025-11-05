@@ -19,7 +19,10 @@ scripts/package-lock.json
 assets/models/*.onnx
 assets/data/*.csv
 assets/ui/*.png
+
+# Derived/extracted video frames (regenerable from the presentation mp4)
 tmp_frames/
+assets/presentation/
 
 # Archives and generated packages
 portfolio/*.zip
