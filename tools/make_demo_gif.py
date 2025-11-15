@@ -171,80 +171,79 @@ def phone_icon(c, cx, cy, r, color):
 
 # ---- avatar ---------------------------------------------------------------
 def draw_avatar(c, cx, cy, worry, accent, blink):
-    # shoulders / shirt bust
-    c.chord([cx - 150, cy + 96, cx + 150, cy + 340], 180, 360, fill=SHIRT)
-    c.chord([cx - 150, cy + 96, cx + 30, cy + 340], 200, 320, fill=SHIRT_SH)
-    # collar
-    c.polygon([(cx - 30, cy + 118), (cx, cy + 150), (cx + 30, cy + 118),
-               (cx + 16, cy + 104), (cx - 16, cy + 104)], fill=(245, 247, 250))
-    # neck
-    c.rrect([cx - 26, cy + 58, cx + 26, cy + 128], 14, fill=SKIN_SH)
-    c.rrect([cx - 24, cy + 56, cx + 24, cy + 120], 14, fill=SKIN)
+    worry = clamp(worry, 0.0, 1.0)
+    hw, hh = 78, 94
 
-    # head
-    hw, hh = 84, 100
-    c.ellipse([cx - hw + 6, cy - hh, cx + hw - 6, cy + hh - 6], fill=SKIN_SH)
-    c.ellipse([cx - hw, cy - hh, cx + hw, cy + hh - 10], fill=SKIN)
+    # shoulders / shirt
+    c.chord([cx - 138, cy + 104, cx + 138, cy + 330], 180, 360, fill=SHIRT)
+    c.chord([cx - 138, cy + 104, cx + 16, cy + 330], 196, 318, fill=SHIRT_SH)
+    # neck + collar
+    c.rrect([cx - 20, cy + 62, cx + 20, cy + 124], 12, fill=SKIN_SH)
+    c.rrect([cx - 18, cy + 58, cx + 18, cy + 112], 12, fill=SKIN)
+    c.polygon([(cx - 24, cy + 116), (cx, cy + 146), (cx + 24, cy + 116),
+               (cx + 13, cy + 104), (cx - 13, cy + 104)], fill=(236, 240, 245))
+
     # ears
     for sx in (-1, 1):
-        c.ellipse([cx + sx * hw - 12, cy - 4, cx + sx * hw + 12, cy + 30], fill=SKIN)
-        c.ellipse([cx + sx * hw - 5, cy + 2, cx + sx * hw + 7, cy + 22], fill=SKIN_SH)
-    # hair
-    c.chord([cx - hw - 2, cy - hh - 10, cx + hw + 2, cy + 54], 180, 360, fill=HAIR)
-    c.rect([cx - hw - 2, cy - hh - 10, cx + hw + 2, cy - hh + 30], fill=HAIR)
-    c.chord([cx - hw - 2, cy - hh - 6, cx + 24, cy + 20], 205, 315, fill=(44, 34, 30))
-    # side hair strands framing face
-    c.pieslice([cx - hw - 2, cy - 40, cx - hw + 40, cy + 60], 90, 180, fill=HAIR)
-    c.pieslice([cx + hw - 40, cy - 40, cx + hw + 2, cy + 60], 0, 90, fill=HAIR)
+        c.ellipse([cx + sx * hw - 9, cy + 2, cx + sx * hw + 9, cy + 28], fill=SKIN)
+        c.ellipse([cx + sx * hw - 3, cy + 8, cx + sx * hw + 5, cy + 22], fill=SKIN_SH)
 
-    # eyebrows (inner-up when worried)
-    ex, eye_y = 34, cy - 4
-    brow_y = eye_y - 26 - worry * 3
-    tilt = worry * 13
+    # head (single clean ellipse)
+    c.ellipse([cx - hw, cy - hh, cx + hw, cy + hh - 4], fill=SKIN)
+
+    # hair: clean rounded crown, no floating strands
+    c.chord([cx - hw - 2, cy - hh - 12, cx + hw + 2, cy + 4], 180, 360, fill=HAIR)
+
+    ex, eye_y = 30, cy - 2
+
+    # eyebrows (restrained: slight raise + inner-up when worried)
+    brow_y = eye_y - 22 - worry * 3
+    tilt = worry * 7
     for side, sx in ((-1, -ex), (1, ex)):
-        inner = cx + sx + side * -15
-        outer = cx + sx + side * 15
-        c.line([(inner, brow_y - tilt), (outer, brow_y + tilt * 0.4)], fill=HAIR, width=6)
+        inner = cx + sx - side * 12
+        outer = cx + sx + side * 12
+        c.line([(inner, brow_y - tilt), (outer, brow_y + tilt * 0.3)], fill=HAIR, width=5)
 
     # eyes
-    eye_open = 7 + worry * 5
+    eye_open = 8 + worry * 3
     for sx in (-ex, ex):
         if blink:
-            c.line([(cx + sx - 13, eye_y), (cx + sx + 13, eye_y)], fill=(120, 95, 85), width=3)
+            c.arc([cx + sx - 12, eye_y - 6, cx + sx + 12, eye_y + 8], 20, 160,
+                  fill=(120, 95, 85), width=3)
             continue
-        c.ellipse([cx + sx - 14, eye_y - eye_open, cx + sx + 14, eye_y + eye_open], fill=(250, 250, 252))
-        c.ellipse([cx + sx - 7, eye_y - 7, cx + sx + 7, eye_y + 7], fill=(58, 46, 42))
-        c.ellipse([cx + sx - 3, eye_y - 3, cx + sx + 3, eye_y + 3], fill=(20, 16, 14))
-        c.ellipse([cx + sx + 1, eye_y - 5, cx + sx + 4, eye_y - 2], fill=(240, 240, 245))
-    # lower lid crease when worried
-    if worry > 0.55:
-        for sx in (-ex, ex):
-            c.arc([cx + sx - 14, eye_y - 2, cx + sx + 14, eye_y + 20], 20, 160, fill=SKIN_SH, width=2)
+        c.ellipse([cx + sx - 12, eye_y - eye_open, cx + sx + 12, eye_y + eye_open], fill=(250, 250, 252))
+        c.ellipse([cx + sx - 6, eye_y - 6, cx + sx + 6, eye_y + 6], fill=(76, 60, 54))
+        c.ellipse([cx + sx - 3, eye_y - 3, cx + sx + 3, eye_y + 3], fill=(26, 20, 18))
+        c.ellipse([cx + sx + 1, eye_y - 5, cx + sx + 4, eye_y - 2], fill=(244, 244, 248))
 
     # nose
-    c.line([(cx - 2, eye_y + 10), (cx - 7, cy + 34)], fill=SKIN_SH, width=4)
-    c.arc([cx - 9, cy + 24, cx + 7, cy + 40], 20, 160, fill=SKIN_SH, width=3)
+    c.line([(cx - 1, eye_y + 8), (cx - 6, cy + 26)], fill=SKIN_SH, width=3)
+    c.arc([cx - 8, cy + 18, cx + 6, cy + 32], 25, 155, fill=SKIN_SH, width=2)
 
-    # mouth
-    my = cy + 60
-    if worry < 0.4:
-        t = worry / 0.4
-        c.arc([cx - 28, my - 20, cx + 28, my + 12], lerp(15, 5, t), lerp(165, 175, t),
-              fill=(176, 92, 88), width=6)
+    # mouth (restrained: gentle smile -> modest open)
+    my = cy + 50
+    if worry < 0.45:
+        t = worry / 0.45
+        c.arc([cx - 22, my - 14, cx + 22, my + 10], lerp(18, 6, t), lerp(162, 174, t),
+              fill=(178, 100, 96), width=5)
     else:
-        mo = lerp(5, 22, (worry - 0.4) / 0.6)
-        c.ellipse([cx - 17, my - mo, cx + 17, my + mo], fill=(120, 58, 62), outline=(168, 92, 90), width=3)
-        if mo > 12:
-            c.chord([cx - 17, my - mo, cx + 17, my + mo * 0.4], 0, 180, fill=(210, 130, 130))
+        t = (worry - 0.45) / 0.55
+        mo = lerp(4, 13, t)
+        c.ellipse([cx - 12, my - mo, cx + 12, my + mo], fill=(126, 68, 68), outline=(172, 104, 100), width=2)
+        if mo > 8:
+            c.chord([cx - 12, my - mo, cx + 12, my + mo * 0.35], 0, 180, fill=(206, 132, 128))
 
-    # blush (calm) / pallor is default; sweat (worried)
-    if worry > 0.62:
-        t = (worry - 0.62) / 0.38
-        sx = cx + hw - 22
-        sy = cy - 34 + t * 46
-        c.ellipse([sx - 8, sy, sx + 8, sy + 18], fill=(120, 205, 255))
-        c.polygon([(sx, sy - 10), (sx - 8, sy + 5), (sx + 8, sy + 5)], fill=(120, 205, 255))
-        c.ellipse([sx - 4, sy + 3, sx - 1, sy + 8], fill=(200, 235, 255))
+    # calm blush / anxious sweat
+    if worry < 0.35:
+        for sx in (-1, 1):
+            c.ellipse([cx + sx * 42 - 10, cy + 20, cx + sx * 42 + 10, cy + 33], fill=(238, 172, 158, 80))
+    elif worry > 0.72:
+        t = (worry - 0.72) / 0.28
+        sx = cx + hw - 16
+        sy = cy - 30 + t * 42
+        c.ellipse([sx - 6, sy, sx + 6, sy + 15], fill=(120, 205, 255))
+        c.polygon([(sx, sy - 8), (sx - 6, sy + 4), (sx + 6, sy + 4)], fill=(120, 205, 255))
+        c.ellipse([sx - 3, sy + 3, sx - 1, sy + 7], fill=(205, 236, 255))
 
 
 # ---- panels ---------------------------------------------------------------
@@ -310,13 +309,13 @@ def draw_camera(c, box, cx, cy, worry, accent, phase, f, blink):
 
     draw_avatar(c, cx, cy, worry, accent, blink)
 
-    # scan line sweep
+    # scan line sweep (subtle)
     sweep = (math.sin(f * 0.18) * 0.5 + 0.5)
     sy = lerp(y0 + 20, y1 - 20, sweep)
-    c.line([(x0 + 8, sy), (x1 - 8, sy)], fill=(accent[0], accent[1], accent[2], 70), width=2)
+    c.line([(x0 + 8, sy), (x1 - 8, sy)], fill=(accent[0], accent[1], accent[2], 45), width=2)
 
     # detection bounding box with corner brackets + glow
-    bw, bh = 122, 150
+    bw, bh = 112, 144
     bx0, by0, bx1, by1 = cx - bw, cy - bh + 8, cx + bw, cy + bh - 6
     glow = 40 + (30 if phase >= 3 else 0)
     c.rrect([bx0 - 3, by0 - 3, bx1 + 3, by1 + 3], 8, outline=(accent[0], accent[1], accent[2], glow), width=3)
