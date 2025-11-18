@@ -2,7 +2,7 @@
 
 ## Voice Phishing Prevention ATM Emotion Recognition System
 
-**Team Tripos (트라이포스)** · Sangmyung University · Graduation Project · 2024
+**Team Triforce (트라이포스)** · Sangmyung University · Graduation Project · 2024
 
 **Members:** Kim Seong-hyeon, Byeon Seong-ho, Ahn Seong-chan, Lim Jae-young, Jin Seok-ho
 

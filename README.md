@@ -2,7 +2,7 @@
 
 # 보이스피싱 피해자 방지를 위한 ATM 감성인식 시스템
 
-**팀 트라이포스 (Tripos)** · 상명대학교 · 2024 졸업 프로젝트
+**팀 트라이포스 (Triforce)** · 상명대학교 · 2024 졸업 프로젝트
 
 **한국어** · [English](README.en.md)
 
@@ -16,7 +16,7 @@
 ![Compute](https://img.shields.io/badge/Compute-56×_↓-3498db)
 ![Model](https://img.shields.io/badge/Student-0.3_GMAC-3498db)
 
-[발표 영상](docs/demo/tripos_graduation_presentation.mp4) · [상세 포트폴리오](docs/PORTFOLIO.md) · [웹 포트폴리오](docs/web/index.html)
+[발표 영상](docs/demo/triforce_graduation_presentation.mp4) · [상세 포트폴리오](docs/PORTFOLIO.md) · [웹 포트폴리오](docs/web/index.html)
 
 </div>
 
@@ -53,7 +53,7 @@
 
 | 자료 | 설명 |
 |:---|:---|
-| [발표 영상](docs/demo/tripos_graduation_presentation.mp4) | 팀 트라이포스 전체 발표 (약 8분) |
+| [발표 영상](docs/demo/triforce_graduation_presentation.mp4) | 팀 트라이포스 전체 발표 (약 8분) |
 | `python src/cap.py` | 실시간 웹캠 불안 탐지 데모 |
 
 ---
@@ -193,7 +193,7 @@ emonet-anxiety-detection/
 └── docs/
     ├── PORTFOLIO.md
     ├── demo/demo_scenario.gif              # 동작 시나리오 애니메이션
-    ├── demo/tripos_graduation_presentation.mp4
+    ├── demo/triforce_graduation_presentation.mp4
     └── web/index.html
 ```
 

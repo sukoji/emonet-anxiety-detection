@@ -1,6 +1,6 @@
 # 졸업 프로젝트 포트폴리오
 
-## 팀 트라이포스 (Tripos)
+## 팀 트라이포스 (Triforce)
 
 | 항목 | 내용 |
 |:---|:---|
@@ -87,4 +87,4 @@ ATM 이용 중 보이스피싱 피해를 예방하기 위해, 카메라 기반 �
 ## 8. 참고
 
 - [Lee et al., Appl. Sci. 2023, 13, 6409](https://doi.org/10.3390/app13116409)
-- [발표 영상](../demo/tripos_graduation_presentation.mp4)
+- [발표 영상](../demo/triforce_graduation_presentation.mp4)

@@ -2,7 +2,7 @@
 
 # ATM Emotion Recognition for Voice-Phishing Prevention
 
-**Team Tripos** · Sangmyung University · 2024 Graduation Project
+**Team Triforce** · Sangmyung University · 2024 Graduation Project
 
 [한국어](README.md) · **English**
 
@@ -16,7 +16,7 @@
 ![Compute](https://img.shields.io/badge/Compute-56×_↓-3498db)
 ![Model](https://img.shields.io/badge/Student-0.3_GMAC-3498db)
 
-[Presentation](docs/demo/tripos_graduation_presentation.mp4) · [Portfolio](docs/PORTFOLIO.md) · [Web Portfolio](docs/web/index.html)
+[Presentation](docs/demo/triforce_graduation_presentation.mp4) · [Portfolio](docs/PORTFOLIO.md) · [Web Portfolio](docs/web/index.html)
 
 </div>
 
@@ -30,7 +30,7 @@
 | ⚙️ **How** | Lightweight FER (Knowledge Distillation) → arousal/valence → **LDA + SVM anxiety classifier** |
 | 📊 **Results** | **86%** accuracy · **0.96** anxiety recall · **56× less** compute than the teacher |
 | 🖥️ **Deliverable** | Real-time webcam demo [`src/cap.py`](src/cap.py) · presented at the 2024 Graduation Portfolio Festival |
-| 👥 **Team** | Tripos — Kim Seong-hyeon · Byeon Seong-ho · Ahn Seong-chan · Lim Jae-young · Jin Seok-ho |
+| 👥 **Team** | Triforce — Kim Seong-hyeon · Byeon Seong-ho · Ahn Seong-chan · Lim Jae-young · Jin Seok-ho |
 
 > **Motivation** — Static ATM warning messages are largely ineffective. We read **anxiety directly from the face** and intervene actively.
 > `camera → emotion recognition → anxiety classification → counselor alert`
@@ -53,7 +53,7 @@
 
 | Resource | Description |
 |:---|:---|
-| [Presentation video](docs/demo/tripos_graduation_presentation.mp4) | Full team presentation (~8 min) |
+| [Presentation video](docs/demo/triforce_graduation_presentation.mp4) | Full team presentation (~8 min) |
 | `python src/cap.py` | Real-time webcam anxiety-detection demo |
 
 ---
@@ -193,7 +193,7 @@ emonet-anxiety-detection/
 └── docs/
     ├── PORTFOLIO.md
     ├── demo/demo_scenario.gif              # scenario animation
-    ├── demo/tripos_graduation_presentation.mp4
+    ├── demo/triforce_graduation_presentation.mp4
     └── web/index.html
 ```
 
@@ -235,7 +235,7 @@ emonet-anxiety-detection/
 
 <div align="center">
 
-**Team Tripos** · Sangmyung University · 2024 Graduation Project
+**Team Triforce** · Sangmyung University · 2024 Graduation Project
 
 Kim Seong-hyeon · Byeon Seong-ho · Ahn Seong-chan · Lim Jae-young · Jin Seok-ho
 
